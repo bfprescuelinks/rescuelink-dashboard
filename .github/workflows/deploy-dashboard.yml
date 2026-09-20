@@ -1,0 +1,40 @@
+name: Deploy RescueLink Dashboard
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "RescueLink-dashboard-deploy.zip"
+      - ".github/workflows/deploy-dashboard.yml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract dashboard
+        run: unzip -q RescueLink-dashboard-deploy.zip
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload dashboard
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dashboard/dist
+      - name: Deploy dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4
