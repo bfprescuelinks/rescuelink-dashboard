@@ -8,7 +8,7 @@
     panel.setAttribute('aria-label', 'Live weather map monitoring');
     panel.innerHTML = `
       <div class="weather-panel-head">
-        <div><strong>LIVE WEATHER MAP</strong><small>BARMM · current conditions</small></div>
+        <div><strong>RAIN FORECAST MAP</strong><small>BARMM · next 12 hours · model forecast</small></div>
         <button type="button" aria-label="Expand weather map">Expand</button>
       </div>
       <iframe title="BARMM live weather map" src="./weather-map.html" loading="lazy"></iframe>
