@@ -9,6 +9,8 @@
     html,body,#map{height:100%;margin:0}body{font:12px system-ui,sans-serif;color:#24272d}#map{background:#e9eef2}
     .toolbar{position:absolute;z-index:1000;top:9px;left:9px;background:#fff;border-radius:8px;padding:7px;box-shadow:0 2px 10px #0003;max-width:calc(100% - 96px)}
     .toolbar button{border:1px solid #d2d5dc;background:#fff;padding:5px 7px;cursor:pointer;font-weight:700;color:#303844}.toolbar button:first-child{border-radius:5px 0 0 5px}.toolbar button:nth-child(3){border-radius:0 5px 5px 0}.toolbar button.active{background:#8d0b13;color:#fff;border-color:#8d0b13}.toolbar #refresh{border-radius:5px;margin-left:5px}
+    .forecast-controls{position:absolute;z-index:1000;top:52px;left:9px;background:#fff;border-radius:8px;padding:7px 9px;box-shadow:0 2px 10px #0003;display:flex;align-items:center;gap:7px;max-width:calc(100% - 96px)}
+    .forecast-controls button{border:0;border-radius:5px;background:#8d0b13;color:#fff;font-weight:800;padding:5px 8px;cursor:pointer}.forecast-controls input{width:110px;accent-color:#8d0b13}.forecast-controls output{font-weight:800;white-space:nowrap;font-size:11px}
     .status{position:absolute;z-index:1000;bottom:18px;left:8px;right:8px;background:#ffffffed;padding:6px 9px;border-radius:6px;font-size:11px;box-shadow:0 1px 6px #0002;pointer-events:none}
     .weather-value{font-size:11px;font-weight:900;line-height:1;min-width:28px;text-align:center;text-shadow:0 1px 2px #0008}.leaflet-popup-content{line-height:1.5}
   </style>
@@ -16,9 +18,10 @@
 <body>
   <div id="map" role="application" aria-label="Weather estimates for BARMM monitoring locations"></div>
   <div class="toolbar" aria-label="Weather map layers">
-    <button type="button" data-layer="rain" class="active">Rain</button><button type="button" data-layer="wind">Wind</button><button type="button" data-layer="temp">Temp</button><button type="button" id="refresh">↻</button>
+    <button type="button" data-layer="rain" class="active">Rain</button><button type="button" data-layer="wind">Wind</button><button type="button" data-layer="temp">Temp</button><button type="button" id="refresh" aria-label="Refresh forecast">↻</button>
   </div>
-  <div class="status" id="status" role="status">Loading weather conditions…</div>
+  <div class="forecast-controls"><button type="button" id="play" aria-label="Play forecast">▶</button><input id="forecast-hour" type="range" min="0" max="12" value="0" aria-label="Forecast hour"><output id="forecast-time">Loading…</output></div>
+  <div class="status" id="status" role="status">Loading rain forecast…</div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="./weather-map.js" defer></script>
 </body>
