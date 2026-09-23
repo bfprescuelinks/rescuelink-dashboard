@@ -5,7 +5,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "RescueLink-dashboard-deploy.zip"
+      - "RescueLink-dashboard-deploy-v3.zip"
       - ".github/workflows/deploy-dashboard.yml"
 
 permissions:
@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Extract dashboard
-        run: unzip -q RescueLink-dashboard-deploy.zip
+        run: unzip -q RescueLink-dashboard-deploy-v3.zip
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
