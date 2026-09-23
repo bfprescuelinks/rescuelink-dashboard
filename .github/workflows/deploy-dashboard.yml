@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - "RescueLink-dashboard-deploy-v3.zip"
+      - "dashboard-clock.js"
       - ".github/workflows/deploy-dashboard.yml"
 
 permissions:
@@ -27,6 +28,16 @@ jobs:
       - uses: actions/checkout@v4
       - name: Extract dashboard
         run: unzip -q RescueLink-dashboard-deploy-v3.zip
+      - name: Add Philippine time clock
+        run: |
+          cp dashboard-clock.js dashboard/dist/clock.js
+          python3 - <<'PY'
+          from pathlib import Path
+          page = Path("dashboard/dist/index.html")
+          content = page.read_text()
+          content = content.replace("</body>", '<script defer src="./clock.js"></script></body>')
+          page.write_text(content)
+          PY
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
