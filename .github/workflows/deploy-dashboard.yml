@@ -7,9 +7,6 @@ on:
     paths:
       - "RescueLink-dashboard-deploy-v3.zip"
       - "dashboard-clock.js"
-      - "weather-monitor.js"
-      - "weather-map.html"
-      - "weather-map.js"
       - ".github/workflows/deploy-dashboard.yml"
 
 permissions:
@@ -34,13 +31,11 @@ jobs:
       - name: Add Philippine time clock
         run: |
           cp dashboard-clock.js dashboard/dist/clock.js
-          cp weather-monitor.js dashboard/dist/weather-monitor.js
-          cp weather-map.html weather-map.js dashboard/dist/
           python3 - <<'PY'
           from pathlib import Path
           page = Path("dashboard/dist/index.html")
           content = page.read_text()
-          content = content.replace("</body>", '<script defer src="./clock.js"></script><script defer src="./weather-monitor.js"></script></body>')
+          content = content.replace("</body>", '<script defer src="./clock.js"></script></body>')
           page.write_text(content)
           PY
       - name: Configure Pages
